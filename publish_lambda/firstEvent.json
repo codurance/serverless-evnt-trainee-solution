@@ -1,0 +1,9 @@
+    [
+        {
+            "Time": "1970-01-01T00:10:00",
+            "Source": "codurance.event2",
+            "Resources": [],
+            "DetailType": "CoduranceEvent",
+            "Detail": "{\"msg\":\"say hello\"}"
+        }
+    ]

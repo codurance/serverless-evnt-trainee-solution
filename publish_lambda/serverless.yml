@@ -1,0 +1,23 @@
+
+service: serverless-evnt-pub 
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - events:PutEvents
+      Resource:
+        - "*"
+
+functions:
+  publish:
+    handler: handler.publish
+    events:
+      - http:
+          path: publish
+          method: get
+          cors: true
+
+    

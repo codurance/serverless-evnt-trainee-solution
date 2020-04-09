@@ -1,0 +1,13 @@
+service: serverless-evnt-sub 
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - eventBridge:
+          pattern:
+            source:
+              - codurance.event2 
