@@ -1,27 +1,13 @@
 'use strict';
 
 const aws = require('aws-sdk')
-const parse = aws.DynamoDB.Converter.output;
-const ddb = new aws.DynamoDB({ apiVersion: '2012-08-10'})
 const docClient = new aws.DynamoDB.DocumentClient()
 
 module.exports.createPost = async event => {
   console.log(event)
   console.log(event.detail)
-  var body = event.detail
-  var params = {
-    TableName: 'posts',
-    Key: {
-      userId: body.userId
-    },
-    UpdateExpression: "SET #posts  = list_append(#posts, :post)",
-    ExpressionAttributeNames: { "#posts" : "posts"},
-    ExpressionAttributeValues: {":post": [event.detail]},
-    ReturnValues : "UPDATED_NEW"
-
-  }
-
-  return await docClient.update(params).promise()
+  var post = event.detail
+  return addPost(post, post.userId, 'posts')
 };
 
 module.exports.materialize = async event => {
@@ -31,7 +17,7 @@ module.exports.materialize = async event => {
   const followers = await getFollowers(post)
   var promises = []
   followers.forEach((follower, index) => { 
-    promises.push(addToTimeline(followers, post))
+    promises.push(addToTimeline(follower, post))
   })
   return Promise.all(promises)
 };
@@ -55,7 +41,6 @@ async function addToTimeline(follower, post) {
   console.log("Adding post to " + follower + "'s timeline")
   return addPost(post, follower, 'timeline')
 }
-
 
 async function addPost(post, user, table) {
   console.log("Inside addPost for ", post, user, table)
