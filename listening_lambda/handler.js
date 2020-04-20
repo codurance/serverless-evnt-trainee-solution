@@ -21,25 +21,6 @@ module.exports.createPost = async event => {
 
   }
 
-  return await new Promise((resolve, reject) => {
-    docClient.update(params, (err, data) => {
-      console.log("@ docClient update")
-      if (err) {
-        console.log("Error", err)
-        reject()
-      } else {
-        console.log("I got a response ")
-        const response = {
-          statusCode: 200,
-          body: JSON.stringify(
-            parse({ "M": data.Item}).posts,
-            null,
-            2
-          )
-        }
-        console.log(response);
-        return callback(null, response)
-      }
-    })
-  })
+  return await docClient.update(params).promise()
+};
 };
