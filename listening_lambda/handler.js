@@ -23,4 +23,9 @@ module.exports.createPost = async event => {
 
   return await docClient.update(params).promise()
 };
+
+module.exports.materialize = async event => {
+  console.log("Materialize event", event);
+  var post = event.detail
+  console.log(post)
 };

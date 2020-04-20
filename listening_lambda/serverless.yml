@@ -24,4 +24,11 @@ functions:
       - eventBridge:
           pattern:
             source:
-              - codurance.event2 
+              - codurance.event2
+  materialize:
+    handler: handler.materialize
+    events:
+      - eventBridge:
+          pattern:
+            source:
+              - codurance.event2
