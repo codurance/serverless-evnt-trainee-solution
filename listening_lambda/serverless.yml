@@ -16,6 +16,9 @@ provider:
       # the specific table for the stage
       Resource:
         - "arn:aws:dynamodb:${self:provider.region}:*:table/posts"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/followed"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/timeline"
+
 
 functions:
   createPost:
