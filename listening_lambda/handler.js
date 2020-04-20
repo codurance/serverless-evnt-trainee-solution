@@ -5,7 +5,7 @@ const parse = aws.DynamoDB.Converter.output;
 const ddb = new aws.DynamoDB({ apiVersion: '2012-08-10'})
 const docClient = new aws.DynamoDB.DocumentClient()
 
-module.exports.hello = async event => {
+module.exports.createPost = async event => {
   console.log(event)
   console.log(event.detail)
   var body = event.detail

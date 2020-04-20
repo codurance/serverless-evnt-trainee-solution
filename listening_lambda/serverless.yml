@@ -18,8 +18,8 @@ provider:
         - "arn:aws:dynamodb:${self:provider.region}:*:table/posts"
 
 functions:
-  hello:
-    handler: handler.hello
+  createPost:
+    handler: handler.createPost
     events:
       - eventBridge:
           pattern:
